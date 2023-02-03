@@ -1,5 +1,5 @@
-// import StockTracker from "./StockTracker";
-
+import StockTracker from "./StockTracker";
+import { useState } from "react";
 import Button from "./components/Button";
 
 const Question3: React.FC = () => {
@@ -43,13 +43,32 @@ const Question3: React.FC = () => {
 };
 
 const StockTrackerPanel: React.FC = () => {
+  const [stockName, setStocknameText] = useState("");
+  const startTracking = () => {
+    const stockTracker = new StockTracker(stockName);
+    stockTracker.on("", () => {});
+  };
+  const setStockname = (e: any) => {
+    setStocknameText(e.target.value);
+  };
   return (
     <div className="gap-2">
       <input
         className="inline-block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 mr-2 w-32 p-2.5"
         placeholder="Stock name"
+        onChange={setStockname}
       />
-      <Button>Start Tracking</Button>
+      <Button onClick={startTracking}>Start Tracking</Button>
+      <div>
+        <div>
+          <div>Stock name: {}</div>
+          <div>Current Price: {}</div>
+          <div>Changes: {}</div>
+          <div>History prices: {}</div>
+        </div>
+
+        <button className="unsub">Unsubscribe </button>
+      </div>
     </div>
   );
 };
